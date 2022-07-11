@@ -9,11 +9,16 @@ todos = [
     { "label": "My first task", "done": False },
 ]
 
+# @app.route('/todos', methods=['GET'])
+# def hello_world():
+#     return ('<h1>Hello!</h1>')
+
+
 
 @app.route('/todos', methods=['GET'])
 def todo_list():
     json_todo_list = jsonify(todos)
-    return json_todo_list 
+    return json_todo_list, 200
 
 @app.route('/todos', methods=['POST'])
 def add_new_todo():
@@ -27,7 +32,8 @@ def add_new_todo():
 def delete_todo(position):
     global todos 
     new_todos=list(filter(lambda todo: todos.index(todo) != position, todos))
-    todos=new_todosjson_todo_list = jsonify(todos)
+    todos=new_todos
+
 
     print("This is the position to delete: ",position)
     return jsonify(todos), 200
@@ -36,4 +42,4 @@ def delete_todo(position):
 
 
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=3245, debug=True)
+    app.run(host='0.0.0.0', port=3245, debug=True)
